@@ -54,7 +54,7 @@ func createRouter(dbRepo *gen.Queries) http.Handler {
 		r.Route("/api", func(r chi.Router) {
 			r.Get("/task/{id}", tasksHandler.GetTaskById)
 			r.Get("/tasks", tasksHandler.GetTasks)
-			r.Post("/", tasksHandler.CreateTask)
+			r.Post("/task", tasksHandler.CreateTask)
 		})
 	})
 
