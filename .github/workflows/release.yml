@@ -1,0 +1,36 @@
+name: Go CD (Release Build)
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.57.2
+
+      - name: Lint code
+        run: $(go env GOPATH)/bin/golangci-lint run ./...
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Build binary
+        run: go build -o myapp
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: myapp
