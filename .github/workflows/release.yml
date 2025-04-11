@@ -7,6 +7,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
@@ -20,12 +22,11 @@ jobs:
       - name: Download Go dependencies
         run: go mod download
 
-      - name: Install golangci-lint
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.57.2
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
-      - name: Lint code
-        run: $(go env GOPATH)/bin/golangci-lint run ./...
+      - name: Lint code with staticcheck
+        run: $(go env GOPATH)/bin/staticcheck ./...
 
       - name: Run tests
         run: go test ./...
@@ -34,6 +35,6 @@ jobs:
         run: go build -o myapp
 
       - name: Upload release asset
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: myapp
