@@ -56,7 +56,7 @@ func (tr TasksRepo) GetTasks(ctx context.Context) ([]domain.Task, error) {
 }
 
 func (tr TasksRepo) CreateTask(ctx context.Context, data domain.Task) (domain.Task, error) {
-	ctx, span := otel.GetTracerProvider().Tracer(traceNameTasksRepo).Start(ctx, traceNameTasksRepo+".GetTasks")
+	ctx, span := otel.GetTracerProvider().Tracer(traceNameTasksRepo).Start(ctx, traceNameTasksRepo+".CreateTask")
 	defer span.End()
 
 	task, err := tr.querier.SaveTask(ctx, gen.SaveTaskParams{
