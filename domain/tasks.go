@@ -13,8 +13,6 @@ type TasksRepo interface {
 	GetTaskById(ctx context.Context, id uuid.UUID) (Task, error)
 	GetTasks(ctx context.Context) ([]Task, error)
 	CreateTask(ctx context.Context, data Task) (Task, error)
-	//UpdateTask(ctx context.Context, data Task) (Task, error)
-	//DeleteTask(ctx context.Context, id string) error
 }
 
 type Task struct {
