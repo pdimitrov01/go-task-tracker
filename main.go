@@ -1,14 +1,14 @@
 package main
 
 import (
-	"api/adapter/repo/postgres"
+	repo "api/adapter/repo/postgres"
 	"api/adapter/repo/postgres/gen"
 	"api/config"
 	"api/handler"
 	"api/uc"
 	"context"
 	"errors"
-	"github.com/go-chi/chi/v5"
+	chi "github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"log"
 	"net/http"

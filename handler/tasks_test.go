@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"github.com/go-chi/chi/v5"
+	chi "github.com/go-chi/chi/v5"
 	"github.com/golang/mock/gomock"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
